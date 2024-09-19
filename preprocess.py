@@ -48,15 +48,7 @@ def read_image(image_path, is_uploaded=False):
   
 
 def extract_id_card(img):
-    """
-    Extracts the ID card from an image containing other backgrounds.
-
-    Args:
-        img (np.ndarray): The input image.
-
-    Returns:
-        np.ndarray: The cropped image containing the ID card, or None if no ID card is detected.
-    """
+    
 
     # Convert image to grayscale
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -70,7 +62,7 @@ def extract_id_card(img):
     # Find contours
     contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
-    # Select the largest contour (assuming the ID card is the largest object)
+    # Select the largest contour 
     largest_contour = None
     largest_area = 0
     for cnt in contours:
@@ -87,12 +79,9 @@ def extract_id_card(img):
     x, y, w, h = cv2.boundingRect(largest_contour)
 
     logging.info(f"contours are found at, {(x, y, w, h)}")
-    # logging.info("Area largest_area)
+  
 
-    # Apply additional filtering (optional):
-    # - Apply bilateral filtering for noise reduction
-    # filtered_img = cv2.bilateralFiltering(img[y:y+h, x:x+w], 9, 75, 75)
-    # - Morphological operations (e.g., erosion, dilation) for shape refinement
+
     current_wd = os.getcwd()
     filename = os.path.join(current_wd,intermediate_dir_path, conour_file_name)
     contour_id = img[y:y+h, x:x+w]
@@ -109,11 +98,6 @@ def extract_id_card(img):
 def save_image(image, filename, path="."):
   """
   Saves an image to a specified path with the given filename.
-
-  Args:
-      image (np.ndarray): The image data (NumPy array).
-      filename (str): The desired filename for the saved image.
-      path (str, optional): The directory path to save the image. Defaults to "." (current directory).
   """
 
   # Construct the full path
