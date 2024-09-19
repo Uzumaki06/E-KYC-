@@ -121,7 +121,6 @@ def main_content(image_file, face_image_file, conn):
         st.warning("Please upload an ID card image.")
         logging.warning("No ID card image uploaded.")
 
-# Main function setup as previously provided...
 def main():
     # Load configuration from the YAML file
     config_path = r'C:\Users\arora\ekyc\config.yaml' 
@@ -137,16 +136,15 @@ def main():
     Session = sessionmaker(bind=engine)
     conn = Session()
 
-    # conn = st.connection('mysql', type='sql')
 
     wider_page()
     set_custom_theme()
     option = sidebar_section()
     header_section(option) #
-    image_file = st.file_uploader("Upload ID Card",type=["jpg", "png", "jpeg"])  #  file uploader widget in the Streamlit app.
+    image_file = st.file_uploader("Upload ID Card",type=["jpg", "png", "jpeg"]) 
 
     if image_file is not None:
-        face_image_file = st.file_uploader("Upload Face Image",type=["jpg", "png", "jpeg"]) #  file uploader widget in the Streamlit app.
+        face_image_file = st.file_uploader("Upload Face Image",type=["jpg", "png", "jpeg"]) 
         print(type(face_image_file))
         main_content(image_file, face_image_file, conn)
 
